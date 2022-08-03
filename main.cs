@@ -5,6 +5,7 @@ using System.Text;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Net;
 
 class MainProgram {
 	
@@ -43,7 +44,9 @@ class MainProgram {
 		// Welcome 
 		
 		if(countDown == 1 || countDown > 0) {
+			Console.ForegroundColor = ConsoleColor.Blue;
 			Console.WriteLine(welcomeMessage + "\n");
+			Console.ForegroundColor = ConsoleColor.White;
 			Console.WriteLine("Make sure you read the README.md file before using this software. \n Continue? (y/n)");
 			countDown--;
 			string continue1 = Console.ReadLine();
