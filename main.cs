@@ -27,7 +27,7 @@ class MainProgram {
 			using (FileStream fs = File.Create("README.md"))     
 			{    
 				// Add some text to file    
-			Byte[] title = new UTF8Encoding(true).GetBytes("Askel-CMD by Cryptoler \n\n\n Before you start make sure you download .NET down below: \n\n\n WINDOWS 64-BIT: https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.0.302-windows-x64-installer \n LINUX: https://docs.microsoft.com/dotnet/core/install/linux?WT.mc_id=dotnet-35129-website \n MacOS: https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.0.302-macos-x64-installer \n Thank you for installing Askel-CMD!");    
+			Byte[] title = new UTF8Encoding(true).GetBytes("Askel-CMD by Cryptoler \n\n\n If you get an error trying to run the program, install .NET with one of the links below: \n\n\n WINDOWS 64-BIT: https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.0.302-windows-x64-installer \n LINUX: https://docs.microsoft.com/dotnet/core/install/linux?WT.mc_id=dotnet-35129-website \n MacOS: https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-6.0.302-macos-x64-installer \n Thank you for installing Askel-CMD!");    
 				fs.Write(title, 0, title.Length);     
 			}    
 			
@@ -73,12 +73,13 @@ class MainProgram {
 		if(input == "c") {	
 			// Open Chrome
 			Process.Start("chrome.exe");
+			Input();
 		}
 
 		else if(input == "c -y") {
 			// Open youtube in chrome
 			Process.Start("chrome.exe", "http://www.youtube.com");
-			Main(null);
+			Input();
 		}
 		
 		else if(input == "fm") {
