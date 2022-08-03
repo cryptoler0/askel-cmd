@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Net;
+using System.Drawing;
 
 class MainProgram {
 	
@@ -110,7 +111,7 @@ class MainProgram {
 	
 	public static void FileManager() {
 		
-		Console.WriteLine("\n What do you want to do? \n (1) Create File \n (2) Create Folder \n (3) Delete Folder \n (4) Delete File \n (5) Open File \n (6) Go Back \n");
+		Console.WriteLine("\n What do you want to do? \n (1) Create File \n (2) Create Folder \n (3) Delete Folder \n (4) Delete File \n (5) Open File \n (6) Go Back \n (7) Secret!! \n");
 		
 		string choice = Console.ReadLine();
 		
@@ -131,6 +132,9 @@ class MainProgram {
 		}
 		else if(choice == "6") {
 			Input();
+		}
+		else if(choice == "7") {
+			Secret();
 		}
 		else { 
 			Console.WriteLine("Invalid input..."); 
@@ -163,6 +167,23 @@ class MainProgram {
 		
 		// Go back
 		Input();
+	}
+	
+	public static void Secret() {
+		Cursor.Hide();
+		while(true) {
+		Cursor.Hide();
+		Cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
+		Cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
+		Cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
+		Cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
+		Cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
+		Cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
+		Cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
+		
+		MessageBox.Show("Fatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!Fatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!Fatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!Fatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!", "Windows can't load................................................", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		
+		}
 	}
 	
 	public static void CreateFolder() {
