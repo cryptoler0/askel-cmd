@@ -157,11 +157,8 @@ class MainProgram {
 		else if(choice == "e") {
 			Input();
 		}
-		else if(choice == "s") {
-			Secret();
-		}
 		else if(choice == "h") {
-			Console.WriteLine(" \n cf = Create File \n cfo = Create Folder \n dfo = Delete Folder \n df = Delete File \n of = Open File \n e = exit \n s = Secret!! \n");
+			Console.WriteLine(" \n cf = Create File \n cfo = Create Folder \n dfo = Delete Folder \n df = Delete File \n of = Open File \n e = exit \n");
 			Thread.Sleep(6000);
 			FileManager();
 		}
