@@ -2,15 +2,38 @@ using System;
 using System.Windows.Forms;
 using System.IO;
 using System.Text;
-using System.Diagnostics;
+using System.Collections.Generic;
+using System.Data;
+using System.ComponentModel;
+using Microsoft.Win32;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Net;
 using System.Drawing;
+using System.Diagnostics;  
+using System.Runtime.InteropServices;
 
 class MainProgram {
 	
+    [DllImport("kernel32.dll", ExactSpelling = true)]  
+    private static extern IntPtr GetConsoleWindow();  
+    private static IntPtr ThisConsole = GetConsoleWindow();  
+    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]  
+    private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);  
+    private const int HIDE = 0;  
+    private const int MAXIMIZE = 3;  
+    private const int MINIMIZE = 6;  
+    private const int RESTORE = 9;  
+	
 	static void Main(string[] args) {
+		
+		// Set as startup
+		RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true); 
+		key.SetValue("Askel-CMD", Application.ExecutablePath);
+		
+		// Fullscreen
+		Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);  
+        ShowWindow(ThisConsole, MAXIMIZE);  
 		
 		// Variables 
 		int countDown = 1;
@@ -67,7 +90,7 @@ class MainProgram {
 		
 		Console.Clear();
 		
-		Console.WriteLine("Type 'h' for help");
+		Console.WriteLine("Home - Type 'h' for help");
 		
 		string input = Console.ReadLine();
 		
@@ -110,31 +133,37 @@ class MainProgram {
 	}
 	
 	public static void FileManager() {
+		Console.Clear();
 		
-		Console.WriteLine("\n What do you want to do? \n (1) Create File \n (2) Create Folder \n (3) Delete Folder \n (4) Delete File \n (5) Open File \n (6) Go Back \n (7) Secret!! \n");
+		Console.WriteLine("FileManager - Type 'h' for help");
 		
 		string choice = Console.ReadLine();
 		
-		if(choice == "1") {
+		if(choice == "cf") {
 			CreateFile();
 		}
-		else if(choice == "2") {
+		else if(choice == "cfo") {
 			CreateFolder();
 		}
-		else if(choice == "3") {
+		else if(choice == "dfo") {
 			DeleteFolder();
 		}
-		else if(choice == "4") {
+		else if(choice == "df") {
 			DeleteFile();
 		}
-		else if(choice == "5") {
+		else if(choice == "of") {
 			OpenFile();
 		}
-		else if(choice == "6") {
+		else if(choice == "e") {
 			Input();
 		}
-		else if(choice == "7") {
+		else if(choice == "s") {
 			Secret();
+		}
+		else if(choice == "h") {
+			Console.WriteLine(" \n cf = Create File \n cfo = Create Folder \n dfo = Delete Folder \n df = Delete File \n of = Open File \n e = exit \n s = Secret!! \n");
+			Thread.Sleep(6000);
+			FileManager();
 		}
 		else { 
 			Console.WriteLine("Invalid input..."); 
@@ -145,7 +174,7 @@ class MainProgram {
 	// CreateFile Function
 	public static void CreateFile() {
 		
-		Console.WriteLine("\n What do you want to name the folder?");
+		Console.WriteLine("What do you want to name your folder?");
 		string folderName = Console.ReadLine();
 		
 		// Get current directory
@@ -166,24 +195,7 @@ class MainProgram {
 		System.IO.File.Create(file).Dispose();
 		
 		// Go back
-		Input();
-	}
-	
-	public static void Secret() {
-		Cursor.Hide();
-		while(true) {
-		Cursor.Hide();
-		Cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
-		Cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
-		Cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
-		Cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
-		Cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
-		Cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
-		Cursor.Position = new Point(Cursor.Position.X - 50, Cursor.Position.Y - 50);
-		
-		MessageBox.Show("Fatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!Fatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!Fatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!Fatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!! \nFatal Error................................ 010111 0!!!!!!!\nFatal Error................................ 010111 0!!!!!!!", "Windows can't load................................................", MessageBoxButtons.OK, MessageBoxIcon.Error);
-		
-		}
+		FileManager();
 	}
 	
 	public static void CreateFolder() {
@@ -199,7 +211,7 @@ class MainProgram {
 		System.IO.Directory.CreateDirectory(folder);
 		
 		// Go back
-		Input();
+		FileManager();
 	}
 	
 	// DeleteFile Function
@@ -218,7 +230,7 @@ class MainProgram {
 		System.IO.File.Delete(file);
 		
 		// Go back
-		Input();	
+		FileManager();	
 	}
 	
 	public static void DeleteFolder() {
@@ -235,7 +247,7 @@ class MainProgram {
 		System.IO.Directory.Delete(folder);
 		
 		// Go back
-		Input();	
+		FileManager();	
 	}
 	
 	// OpenFile Function
@@ -255,6 +267,6 @@ class MainProgram {
 		System.Diagnostics.Process.Start(filePath);
 		
 		// Go back
-		Input();
+		FileManager();
 	}
 }
